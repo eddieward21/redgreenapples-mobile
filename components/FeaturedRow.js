@@ -8,7 +8,7 @@ const FeaturedRow = ({id, title, description}) => {
   useEffect(() => {
     sanityClient.fetch(
       `
-      *[_type == "featured" && _id == "42135fef-6604-459d-837e-dae03092be79"] {
+      *[_type == "featured" && _id == $id ] {
         ...,
         restaurants[] -> {
           ...,
@@ -18,16 +18,19 @@ const FeaturedRow = ({id, title, description}) => {
             }
         },
       }[0]
-      `
-    , {id})      
-    .then((result) => {
-      setRestaurants(result?.restaurants);
-    });
+      `, { id : id }
+    )
+    .then((data) => {
+      setRestaurants(data?.restaurants)
+    })
+  //  console.log(" ")
+   // console.log("restaurants for " + title + ": " + restaurants + " id : " + id);
+    //console.log(" ")
 
-    console.log("restaurants query: " + restaurants)
+    restaurants.map((restaurant) => console.log(`Restaurants data: ${restaurant.name} ${restaurant.address} ${restaurant.description} ${restaurant.rating}`))
+
+  }, [])
   
-
-  }, []);
   
   
   return (
@@ -40,15 +43,15 @@ const FeaturedRow = ({id, title, description}) => {
         <Text className = "text-xs text-gray-500 px-4">{description}</Text>
 
 <ScrollView horizontal contentContainerStyle = {{paddingHorizontal: 15}} showsHorizontalScrollIndicator = {false} className = "pt-4">
+
     {
-      restaurants.map((restaurant) => {
-        <RestaurantCard address= "221 Mean Street" genre = "Fusion" rating = "4.5" title = "Gean Jeorges" imgUrl = "https://media.timeout.com/images/100597169/750/422/image.jpg" />
-      })
+      restaurants.map((restaurant) => 
+        <RestaurantCard key = {restaurant.id} imgUrl = "https://media.timeout.com/images/100597169/750/422/image.jpg" address = {restaurant.address} id = {restaurant.id} rating = {restaurant.rating} short_description = {restaurant.description} title = {restaurant.name}/>
+      )
     }
 
-    <RestaurantCard address= "221 Main Street" genre = "Fusion" rating = "4.5" title = "Jean Georges" imgUrl = "https://media.timeout.com/images/100597169/750/422/image.jpg" />
-    <RestaurantCard address= "221 Main Street" genre = "Fusion" rating = "4.5" title = "Jean Georges" imgUrl = "https://media.timeout.com/images/100597169/750/422/image.jpg" />
-    <RestaurantCard address= "221 Main Street" genre = "Fusion" rating = "4.5" title = "Jean Georges" imgUrl = "https://media.timeout.com/images/100597169/750/422/image.jpg" />
+
+
 
 </ScrollView>
     </View>
