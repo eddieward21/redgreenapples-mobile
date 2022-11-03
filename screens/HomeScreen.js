@@ -1,13 +1,15 @@
 import { View, Text, processColor, TextInputComponent, ScrollView } from 'react-native'
-import React, {useLayoutEffect} from 'react'
+import React, {useLayoutEffect, useEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView, TextInput } from 'react-native'
 import { Image } from 'react-native'
 import Categories from '../components/Categories'
 import {ChevronDoubleDownIcon, ChevronDownIcon, UserIcon} from 'react-native-heroicons/outline'
 import FeaturedRow from '../components/FeaturedRow'
+import sanityClient from '../sanity'
 
 const HomeScreen = () => {
+    const [featuredCategories, setFeaturedCategories] = useState([]);
     const navigation = useNavigation();
 
     useLayoutEffect(() => {
@@ -15,6 +17,25 @@ const HomeScreen = () => {
           headerShown: false
       })
     }, [])
+
+    useEffect(() => {
+      sanityClient.fetch(
+        `
+      *[_type == "featured"] {
+        ...,
+  restaurants[] -> {
+    ...,
+    dishes[] -> {
+      ...,
+    }
+  }
+}`
+      )
+      .then((result) => setFeaturedCategories(result))
+      console.log(featuredCategories);
+
+    }, [])
+    
 
   return (
     <SafeAreaView className = "bg-white pt-5">
@@ -50,11 +71,14 @@ const HomeScreen = () => {
 
 <ScrollView>
 <Categories/>
-
-<FeaturedRow id = "" title = "Featured" description = "Our featured restaurants..."/> 
-<FeaturedRow id = "" title = "Near You" description = "The best near you:" /> 
-<FeaturedRow id = "" title = "NYC" description = "The best in the NYC Area!"/> 
-
+{featuredCategories.map((category) => (
+  <FeaturedRow 
+  key = {category._id}
+  id = {category._id}
+  title = {category.name}
+  description = {category.short_description}
+  />
+))}
 
 </ScrollView>
     </SafeAreaView>

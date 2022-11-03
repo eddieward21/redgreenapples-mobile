@@ -53,6 +53,19 @@ export default {
       to: [{type: 'category'}],
       
     },
+    {
+      name: 'dishes',
+      title: "Dishes",
+      validation: (Rule) => Rule.required(),
+      type: 'reference',
+      to: [{type: 'dish'}]
+    },
+    {
+      name: 'rating',
+      title: 'rating',
+      type: 'number',
+      validation: (Rule) => Rule.required().min(1).max(5).error("Enter a value between 1 and 5.")
+    }
 
   ],
 

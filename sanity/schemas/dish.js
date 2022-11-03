@@ -3,47 +3,32 @@ export default {
     title: 'Dish',
     type: 'document',
     fields: [
+
       {
-        name: 'name',
-        title: 'Name',
-        type: 'string',
-      },
-      {
-        name: 'slug',
-        title: 'Slug',
-        type: 'slug',
-        options: {
-          source: 'name',
-          maxLength: 96,
-        },
+        name: "name",
+        title: "dish name",
+        type: "string",
+        validation: (Rule) => Rule.required(),
       },
       {
-        name: 'image',
-        title: 'Image',
-        type: 'image',
-        options: {
-          hotspot: true,
-        },
+        name: "short_description",
+        title: "short description",
+        type: "string",
+        validation: (Rule) => Rule.required(),
       },
       {
-        name: 'bio',
-        title: 'Bio',
-        type: 'array',
-        of: [
-          {
-            title: 'Block',
-            type: 'block',
-            styles: [{title: 'Normal', value: 'normal'}],
-            lists: [],
-          },
-        ],
+        name: "price",
+        title: "price",
+        type: "number",
+        validation: (Rule) => Rule.required(),
       },
-    ],
-    preview: {
-      select: {
-        title: 'name',
-        media: 'image',
+      {
+        name: "image",
+        title: "image",
+        type: "image",
+        validation: (Rule) => Rule.required(),
       },
-    },
-  }
+      
+  ]
+    }
   

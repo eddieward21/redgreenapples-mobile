@@ -15,7 +15,7 @@ const RestaurantCard = ({id, imgUrl, title, short_description, address, genre, r
 
           <View className = "ml-2 items-center flex-row">
           <Image className = "h-4 w-4" source = {{uri: "https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/67-512.png"}}/>
-          <Text className = "text-xs">Nearby • {address}</Text>
+          <Text className = "text-xs text-gray-500">Nearby • {address}</Text>
 
           </View>
       </View>
