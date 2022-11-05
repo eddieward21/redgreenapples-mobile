@@ -19,7 +19,7 @@ export default function RestaurantScreen() {
 
   return (
     <View>
-      <Text>Hello Restaurant Screen {title}</Text>
+      <Text className = "text-black-500 text-lg font-bold">{title}</Text>
     </View>
   )
 }
