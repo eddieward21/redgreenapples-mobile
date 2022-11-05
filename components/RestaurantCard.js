@@ -1,10 +1,33 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import React, {useEffect} from 'react'
+import {urlFor} from "../sanity"
+import { useNavigation } from '@react-navigation/native'
 
 const RestaurantCard = ({id, imgUrl, title, short_description, address, genre, rating, dishes, latitude, longitude}) => {
+
+  useEffect(() => {
+    console.log("imgUrl R: " + JSON.stringify(imgUrl));
+  }, [])
+
+  const navigation = useNavigation();
+  
   return (
-    <TouchableOpacity className = "shadow mr-3 bg-white">
-        <Image source ={{uri: imgUrl}} className = "h-36 w-64 rounded-sm"/> 
+    <TouchableOpacity
+     onPress={() => {
+       navigation.navigate('Restaurant', {
+         id,
+         imgUrl,
+         title,
+         short_description,
+         address,
+         genre,
+         dishes,
+         latitude,
+         longitude,
+       })}
+      } 
+     className = "shadow mr-3 bg-white">
+        <Image source ={{ uri: urlFor(imgUrl).url() }} className = "h-36 w-64 rounded-sm"/> 
         <Text className = "text-lg font-bold text-black-500 ml-2">{title}</Text>
 
       <View className = "pb-4">
@@ -14,9 +37,8 @@ const RestaurantCard = ({id, imgUrl, title, short_description, address, genre, r
           </View>
 
           <View className = "ml-2 items-center flex-row">
-          <Image className = "h-4 w-4" source = {{uri: "https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/67-512.png"}}/>
+          <Image className = "h-4 w-4" source = {{uri : "https://img.freepik.com/premium-vector/location-icon-simple-symbol-red-pin-sign_399998-369.jpg?w=2000" }}/>
           <Text className = "text-xs text-gray-500">Nearby • {address}</Text>
-
           </View>
       </View>
     </TouchableOpacity>

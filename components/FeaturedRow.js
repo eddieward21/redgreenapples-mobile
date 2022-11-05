@@ -14,7 +14,7 @@ const FeaturedRow = ({id, title, description}) => {
           ...,
           dishes[] ->,
             type -> {
-              name
+              ...,
             }
         },
       }[0]
@@ -23,13 +23,9 @@ const FeaturedRow = ({id, title, description}) => {
     .then((data) => {
       setRestaurants(data?.restaurants)
     })
-  //  console.log(" ")
-   // console.log("restaurants for " + title + ": " + restaurants + " id : " + id);
-    //console.log(" ")
-
-    restaurants.map((restaurant) => console.log(`Restaurants data: ${restaurant.name} ${restaurant.address} ${restaurant.description} ${restaurant.rating}`))
-
-  }, [])
+    console.log("R: " + restaurants);
+    restaurants.map((restaurant) => console.log("restaurant image: " + restaurant.image))
+  }, [id]);
   
   
   
@@ -46,7 +42,7 @@ const FeaturedRow = ({id, title, description}) => {
 
     {
       restaurants.map((restaurant) => 
-        <RestaurantCard key = {restaurant.id} imgUrl = "https://media.timeout.com/images/100597169/750/422/image.jpg" address = {restaurant.address} id = {restaurant.id} rating = {restaurant.rating} short_description = {restaurant.description} title = {restaurant.name}/>
+        <RestaurantCard imgUrl = {restaurant.image} key = {restaurant.id}  address = {restaurant.address} id = {restaurant.id} rating = {restaurant.rating} short_description = {restaurant.description} title = {restaurant.name} latitude = {restaurant.latitude} longitude = {restaurant.longitude} genre = {restaurant.type?.title} dishes= {restaurant.dishes}/>
       )
     }
 
