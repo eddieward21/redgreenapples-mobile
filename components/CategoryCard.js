@@ -4,7 +4,6 @@ import {urlFor} from '../sanity'
 
 const CategoryCard = ({imgUrl, title}) => {
   useEffect(() => {
-    console.log("C card " + JSON.stringify(imgUrl));
   }, [])
   
   return (

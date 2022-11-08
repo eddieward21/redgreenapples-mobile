@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 const RestaurantCard = ({id, imgUrl, title, short_description, address, genre, rating, dishes, latitude, longitude}) => {
 
   useEffect(() => {
-    console.log("imgUrl R: " + JSON.stringify(imgUrl));
+
   }, [])
 
   const navigation = useNavigation();
@@ -17,6 +17,7 @@ const RestaurantCard = ({id, imgUrl, title, short_description, address, genre, r
        navigation.navigate('Restaurant', {
          id,
          imgUrl,
+         rating,
          title,
          short_description,
          address,

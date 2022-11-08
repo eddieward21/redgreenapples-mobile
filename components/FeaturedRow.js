@@ -13,6 +13,7 @@ const FeaturedRow = ({id, title, description}) => {
         restaurants[] -> {
           ...,
           dishes[] ->,
+          ...,
             type -> {
               ...,
             }
@@ -23,8 +24,9 @@ const FeaturedRow = ({id, title, description}) => {
     .then((data) => {
       setRestaurants(data?.restaurants)
     })
-    console.log("R: " + restaurants);
-    restaurants.map((restaurant) => console.log("restaurant image: " + restaurant.image))
+
+    console.log("restaurants: " + JSON.stringify(restaurants))
+
   }, [id]);
   
   

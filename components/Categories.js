@@ -23,7 +23,7 @@ const Categories = () => {
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator = {false} contentContainerStyle = {{paddingHorizontal: 15, paddingTop:10}}>
       {categories.map((category) => 
-      <CategoryCard title = {category.title} imgUrl = {category.image}/>
+      <CategoryCard key = {category.id} title = {category.title} imgUrl = {category.image}/>
       )}
     </ScrollView>
   )
