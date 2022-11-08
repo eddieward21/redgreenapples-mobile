@@ -24,17 +24,22 @@ export default function RestaurantScreen() {
         longitude,
         rating,
     }} = useRoute()
-    const dishId = dishes["_ref"];
+    
+    const dishId = dishes[0]["_ref"];
+    const dishId2 = dishes[1]["_ref"];
+    console.log("title: " + title)
 
 
     useEffect(() => {
+        console.log("DISHES : " + JSON.stringify(dishes))
         console.log("dishID from use effect: " + dishId)
+        console.log("dishID 2 : " + dishId2)
         sanityClient.fetch(
             `
-        *[_type == "dish" && _id == $dishId ] {
+        *[_type == "dish" && _id == $dishId || _id == $dishId2] {
             ...,
           }
-        [0]`, {dishId}
+        `, {dishId, dishId2}
     
         )
         //.then((result) => console.log("Result: " +  JSON.stringify(result)));
@@ -42,7 +47,7 @@ export default function RestaurantScreen() {
         //console.log("dishID: " + dishId)
         console.log("result all dishes: " + JSON.stringify(allDishes))
 
-    }, [dishId])
+    }, [dishId, dishId2])
     
 
     useLayoutEffect(() => {
@@ -75,16 +80,16 @@ export default function RestaurantScreen() {
 
                 <Text className = "text-gray-500 mt-2">{short_description}</Text>
             </View>
-            <View className = "mt-4 flex-row pl-2 items-center w-full border-y border-gray-200 py-4">
+            <TouchableOpacity className = "mt-4 flex-row pl-4 items-center w-full border-y border-gray-200 py-4">
                 <Image className = "h-5 w-5" source = {{uri :"https://cdn2.iconfinder.com/data/icons/basic-thin-line-color/21/18_1-512.png"}}/> 
                 <Text className = " ml-5 font-bold">View Website</Text>
-                <Image className = "h-5 w-5 ml-auto" source = {{uri : "https://cdn.icon-icons.com/icons2/2090/PNG/512/arrow_right_icon_128385.png"}}/>
-                </View>
+                <Image className = "h-5 w-5 ml-auto mr-4" source = {{uri : "https://cdn.icon-icons.com/icons2/2090/PNG/512/arrow_right_icon_128385.png"}}/>
+                </TouchableOpacity>
             </View>
 
             <View>
-                <Text>{allDishes.name}</Text>
-                <Text>{allDishes.rating}</Text>
+                <Text className = "mb-2 px-4 pt-4 font-bold text-lg">Recommendedations</Text>
+                {allDishes.map((dish) => <DishRow name = {dish.name} price = {dish.price} description = {dish.short_description} image = {dish.image} />)}
             </View>
 
     </ScrollView>

@@ -57,8 +57,8 @@ export default {
       name: 'dishes',
       title: "Dishes",
       validation: (Rule) => Rule.required(),
-      type: 'reference',
-      to: [{type: 'dish'}]
+      type: 'array',
+      of: [{type: 'reference', to: [{type:"dish"}] }],
     },
     {
       name: 'rating',
