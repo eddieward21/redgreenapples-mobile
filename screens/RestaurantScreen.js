@@ -88,7 +88,7 @@ export default function RestaurantScreen() {
             </View>
 
             <View>
-                <Text className = "mb-2 px-4 pt-4 font-bold text-lg">Recommendedations</Text>
+                <Text className = "mb-2 px-4 pt-4 font-bold text-lg">Recommendations</Text>
                 {allDishes.map((dish) => <DishRow name = {dish.name} price = {dish.price} description = {dish.short_description} image = {dish.image} />)}
             </View>
 
