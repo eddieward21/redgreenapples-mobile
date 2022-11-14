@@ -3,13 +3,20 @@ import React, {useEffect, useState} from 'react'
 import sanityClient, { urlFor } from '../sanity'
 import dish from '../sanity/schemas/dish'
 import {useDispatch, useSelector } from 'react-redux'
-import {addToBasket, selectBasketItems, selectItemsById} from '../features/basketslice'
+import {addToBasket, selectBasketItems, selectItemsById, removeFromBasket} from '../features/basketslice'
 
 const DishRow = ({id, name, price, image, description}) => {
   const [isPressed, setIsPressed] = useState(false);
 
   const items = useSelector((state) => selectItemsById(state, id));
   const dispatch = useDispatch();
+
+  const removeItemFromBasket = () => {
+    if(!items.length > 0) {
+      return;
+    }
+    dispatch(removeFromBasket({id}))
+  }
 
   const addItemToBasket = () => {
     dispatch(addToBasket({id, name, description, image, price}))
@@ -43,7 +50,7 @@ const DishRow = ({id, name, price, image, description}) => {
       <View className = "bg-white px-4"> 
     <View className = "flex-row items-center space-x-4 pb-3">
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress = {removeItemFromBasket}>
       <Image className = "h-8 w-8"source = {{uri : "https://www.nicepng.com/png/detail/203-2033066_flat-minus-icon-minus-icon-png-flat.png" }}/>
       
       </TouchableOpacity>
