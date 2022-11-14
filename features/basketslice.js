@@ -11,7 +11,7 @@ const basketSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.value = [...state.items, action.payload]
+      state.items = [...state.items, action.payload]
     },
     removeFromBasket: (state, action) => {
       state.value -= 1
