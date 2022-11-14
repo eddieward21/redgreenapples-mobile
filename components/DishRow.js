@@ -3,12 +3,12 @@ import React, {useEffect, useState} from 'react'
 import sanityClient, { urlFor } from '../sanity'
 import dish from '../sanity/schemas/dish'
 import {useDispatch, useSelector } from 'react-redux'
-import {addToBasket, selectBasketItems} from '../features/basketslice'
+import {addToBasket, selectBasketItems, selectItemsById} from '../features/basketslice'
 
-const DishRow = ({name, price, image, description}) => {
+const DishRow = ({id, name, price, image, description}) => {
   const [isPressed, setIsPressed] = useState(false);
 
-  const items = useSelector(selectBasketItems); 
+  const items = useSelector((state) => selectItemsById(state, id));
   const dispatch = useDispatch();
 
   const addItemToBasket = () => {
@@ -17,6 +17,7 @@ const DishRow = ({name, price, image, description}) => {
 
     useEffect(() => {
       console.log(JSON.stringify(image))
+      console.log("ID: " + id)
 
     }, [])
     

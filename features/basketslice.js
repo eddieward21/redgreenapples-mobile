@@ -23,6 +23,9 @@ export const { addToBasket, removeFromBasket } = basketSlice.actions
 export const selectBasketItems= (state) => state.basket.items
 export default basketSlice.reducer;
 
+export const selectItemsById = (state,id) => 
+  state.basket.items.filter((item) => item.id === id)
+
 
 const store = configureStore({
   reducer: basketSlice.reducer

@@ -32,9 +32,10 @@ export default function RestaurantScreen() {
 
 
     useEffect(() => {
-        console.log("DISHES : " + JSON.stringify(dishes))
-        console.log("dishID from use effect: " + dishId)
-        console.log("dishID 2 : " + dishId2)
+        //console.log("DISHES : " + JSON.stringify(dishes))
+        //console.log("dishID from use effect: " + dishId)
+        //console.log("dishID 2 : " + dishId2)
+
         sanityClient.fetch(
             `
         *[_type == "dish" && _id == $dishId || _id == $dishId2] {
@@ -102,7 +103,7 @@ export default function RestaurantScreen() {
             <Text className = "mb-2 px-4 pt-4 font-bold text-lg">Recommendations</Text>
 
                 <View className = "bg-white"> 
-                {allDishes.map((dish) => <DishRow name = {dish.name} price = {dish.price} description = {dish.short_description} image = {dish.image} />)}
+                {allDishes.map((dish) => <DishRow id = {dish._id} name = {dish.name} price = {dish.price} description = {dish.short_description} image = {dish.image} />)}
                 </View>
             </View>
 
