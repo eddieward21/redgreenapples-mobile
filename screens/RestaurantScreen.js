@@ -7,6 +7,7 @@ import DishRow from '../components/DishRow'
 
 export default function RestaurantScreen() {
 
+    
     const route = useRoute();
     const navigation = useNavigation();
     const [allDishes, setAllDishes] = useState([])
@@ -85,11 +86,24 @@ export default function RestaurantScreen() {
                 <Text className = " ml-5 font-bold">View Website</Text>
                 <Image className = "h-5 w-5 ml-auto mr-4" source = {{uri : "https://cdn.icon-icons.com/icons2/2090/PNG/512/arrow_right_icon_128385.png"}}/>
                 </TouchableOpacity>
+                <TouchableOpacity className = "flex-row pl-4 items-center w-full border-y border-gray-200 py-4">
+                <Image className = "h-5 w-5" source = {{uri :"https://cdn2.iconfinder.com/data/icons/basic-thin-line-color/21/18_1-512.png"}}/> 
+                <Text className = " ml-5 font-bold">Directions</Text>
+                <Image className = "h-5 w-5 ml-auto mr-4" source = {{uri : "https://cdn.icon-icons.com/icons2/2090/PNG/512/arrow_right_icon_128385.png"}}/>
+                </TouchableOpacity>            
+                <TouchableOpacity className = "flex-row pl-4 items-center w-full border-y border-gray-200 py-4">
+                <Image className = "h-5 w-5" source = {{uri :"https://cdn2.iconfinder.com/data/icons/basic-thin-line-color/21/18_1-512.png"}}/> 
+                <Text className = " ml-5 font-bold">Make Reservation</Text>
+                <Image className = "h-5 w-5 ml-auto mr-4" source = {{uri : "https://cdn.icon-icons.com/icons2/2090/PNG/512/arrow_right_icon_128385.png"}}/>
+                </TouchableOpacity>
             </View>
 
             <View>
-                <Text className = "mb-2 px-4 pt-4 font-bold text-lg">Recommendedations</Text>
+            <Text className = "mb-2 px-4 pt-4 font-bold text-lg">Recommendations</Text>
+
+                <View className = "bg-white"> 
                 {allDishes.map((dish) => <DishRow name = {dish.name} price = {dish.price} description = {dish.short_description} image = {dish.image} />)}
+                </View>
             </View>
 
     </ScrollView>
