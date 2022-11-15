@@ -4,6 +4,8 @@ import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/
 import { urlFor } from '../sanity';
 import sanityClient from '../sanity'
 import DishRow from '../components/DishRow'
+import BasketIcon from '../components/BasketIcon'
+
 
 export default function RestaurantScreen() {
 
@@ -59,6 +61,9 @@ export default function RestaurantScreen() {
       }, [])
 
   return (
+      <> 
+    <BasketIcon/>
+
     <ScrollView>
         <View className = "relative"> 
         <Image className = "h-56 bg-gray-300 p-4 w-full" source = {{uri: urlFor(imgUrl).url()}}/>
@@ -102,11 +107,12 @@ export default function RestaurantScreen() {
             <View>
             <Text className = "mb-2 px-4 pt-4 font-bold text-lg">Recommendations</Text>
 
-                <View className = "bg-white"> 
+                <View className = "bg-white pb-36"> 
                 {allDishes.map((dish) => <DishRow id = {dish._id} name = {dish.name} price = {dish.price} description = {dish.short_description} image = {dish.image} />)}
                 </View>
             </View>
 
     </ScrollView>
+    </>
   )
 }

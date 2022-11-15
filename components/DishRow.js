@@ -50,7 +50,7 @@ const DishRow = ({id, name, price, image, description}) => {
       <View className = "bg-white px-4"> 
     <View className = "flex-row items-center space-x-4 pb-3">
 
-      <TouchableOpacity onPress = {removeItemFromBasket}>
+      <TouchableOpacity disabled = {items.length <= 0} onPress = {removeItemFromBasket}>
       <Image className = "h-8 w-8"source = {{uri : "https://www.nicepng.com/png/detail/203-2033066_flat-minus-icon-minus-icon-png-flat.png" }}/>
       
       </TouchableOpacity>
